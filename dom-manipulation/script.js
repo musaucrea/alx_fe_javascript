@@ -76,6 +76,31 @@ function exportToJson() {
     a.click();
     URL.revokeObjectURL(url);
 }
+// Function to fetch quotes from a simulated server
+async function fetchQuotesFromServer() {
+    // Simulated server endpoint
+    const serverUrl = 'https://jsonplaceholder.typicode.com/posts'; // Replace with your server endpoint
+
+    try {
+        const response = await fetch(serverUrl);
+        const data = await response.json();
+        
+        // Simulate server data format and conflict resolution
+        const serverQuotes = data.map(item => ({
+            text: item.title, // Assuming title as quote text for simulation
+            category: 'general' // Assuming a default category for simulation
+        }));
+
+        // Basic conflict resolution strategy
+        quotes = [...new Map([...quotes, ...serverQuotes].map(q => [q.text, q])).values()];
+        saveQuotes();
+        populateCategories();
+        showRandomQuote();
+        alert('Quotes synced with server successfully!');
+    } catch (error) {
+        console.error('Failed to fetch quotes from server:', error);
+    }
+}
 
 // Import quotes from JSON file
 function importFromJsonFile(event) {
