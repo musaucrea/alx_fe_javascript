@@ -128,9 +128,10 @@ async function fetchQuotesFromServer() {
         saveQuotes();
         populateCategories();
         showRandomQuote();
-        alert('Quotes synced with server successfully!');
+        alert('Quotes synced with server!');
     } catch (error) {
         console.error('Failed to fetch quotes from server:', error);
+        alert('Failed to sync quotes with server.');
     }
 }
 
@@ -154,9 +155,9 @@ async function syncQuotesToServer() {
         alert('Quotes synced with server successfully!');
     } catch (error) {
         console.error('Failed to sync quotes to server:', error);
+        alert('Failed to sync quotes with server.');
     }
 }
-
 // Event listeners for import and export
 document.getElementById('importFile').addEventListener('change', importFromJsonFile);
 document.getElementById('exportButton').addEventListener('click', exportToJson);
