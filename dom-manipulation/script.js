@@ -103,6 +103,23 @@ function updateCategories() {
         categoryFilter.appendChild(option);
     });
 }
+// Function to populate categories in the filter dropdown
+function populateCategories() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const categories = new Set(quotes.map(quote => quote.category));
+    categoryFilter.innerHTML = '<option value="all">All Categories</option>';
+
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+    });
+
+    const lastSelectedCategory = localStorage.getItem('lastSelectedCategory') || 'all';
+    categoryFilter.value = lastSelectedCategory;
+    filterQuotes();
+}
 
 // Filter quotes based on selected category
 function filterQuotes() {
